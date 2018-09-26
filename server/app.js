@@ -4,7 +4,7 @@ const schema = require('./schema/schema')
 
 const app = express()
 
-app.use('graphql', graphQLURL({schema}))
+app.use('/graphql', graphQLURL({schema, graphiql: true}))
 
 app.listen(4000, () => {
   console.log('listening to port 4000')
