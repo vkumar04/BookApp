@@ -23,7 +23,7 @@ class BookList extends Component {
       return data
         .books
         .map(book => (
-          <li>{book.name}</li>
+          <li key={book.id}>{book.name}</li>
         ))
     }
   }
@@ -32,7 +32,7 @@ class BookList extends Component {
     return (
       <div>
         <ul id="book-list">
-          <li>{this.displayBooks()}</li>
+          {this.displayBooks()}x
         </ul>
       </div>
     )
