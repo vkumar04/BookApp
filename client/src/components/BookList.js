@@ -32,7 +32,7 @@ class BookList extends Component {
     return (
       <div>
         <ul id="book-list">
-          {this.displayBooks()}x
+          {this.displayBooks()}
         </ul>
       </div>
     )
