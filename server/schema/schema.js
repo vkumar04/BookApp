@@ -67,8 +67,7 @@ const BookType = new GraphQLObjectType({
         return _.find(authors, {id: parent.authorid})
       }
     }
-  }),
-  resolve(parent, args) {}
+  })
 })
 
 const AuthorType = new GraphQLObjectType({
@@ -132,5 +131,43 @@ const RootQuery = new GraphQLObjectType({
     }
   }
 })
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addAuthor: {
+      type: AuthorType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        age: {
+          type: GraphQLInt
+        }
+      },
+      resolve(parent, {name, age}) {
+        let author = new Author({name, age})
+        return author.save()
+      }
+    },
+    addBook: {
+      type: BookType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        genre: {
+          type: GraphQLString
+        },
+        authorId: {
+          type: GraphQLID
+        }
+      },
+      resolve(parent, {name, genre, authorId}) {
+        let book = new Book({name, genre, authorId})
+        return book.save()
+      }
+    }
+  }
+})
 
-module.exports = new GraphQLSchema({query: RootQuery})
+module.exports = new GraphQLSchema({query: RootQuery, mutation: Mutation})
